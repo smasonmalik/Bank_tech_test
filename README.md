@@ -10,7 +10,7 @@ Use the following commands to carry out account functions
 
 Account.deposit(Amount)
 Accpount.withdraw(Amount)
-Account.display
+Account.statement
 
 Private function
   Account.balance

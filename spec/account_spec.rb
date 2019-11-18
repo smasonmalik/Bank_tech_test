@@ -36,4 +36,24 @@ describe Account do
       expect(subject.balance).to eq 0
     end
   end
+
+  describe '#display' do
+    it 'returns the the last transaction and new balance' do
+      subject.deposit(100)
+      expect(subject.statement).to eq ('100.00, 100.00')
+    end
+
+    it 'returns the the last transaction and new balance' do
+      subject.deposit(100)
+      subject.withdraw(50)
+      expect(subject.statement).to eq ('50.00, 50.00')
+    end
+
+    it 'returns the the last 2 transactions and new balance' do
+      subject.deposit(100)
+      subject.withdraw(50)
+      expect(subject.statement).to eq ("100.00, 100.00\n50.00, 50.00")
+    end
+  end
+
 end
