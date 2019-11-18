@@ -21,12 +21,17 @@ describe Account do
   end
 
   describe '#display' do
-    it 'returns the date, amount and balance of last action today' do
+    it 'returns the date, amount and balance of last credit action today' do
       subject.deposit(100)
       expect(subject.statement).to eq "#{Date.today}, 100.00, 100.00"
     end
 
-    it 'returns the date, amount and balance of last action yesterday' do
+    # it 'returns the date, amount and balance of last debit action today' do
+    #   subject.deposit(100)
+    #   expect(subject.statement).to eq "#{Date.today}, 100.00, 100.00"
+    # end
+
+    it 'returns the date, amount and balance of last credit action yesterday' do
       subject.deposit(100, '2019-11-17')
       expect(subject.statement).to eq "#{Date.today - 1}, 100.00, 100.00"
     end
@@ -37,15 +42,29 @@ describe Account do
       expect(subject.statement).to eq "#{Date.today}, 100.00, 100.00\n#{Date.today}, 50.00, 150.00"
     end
   end
+
+  describe '#withdraw' do
+    it 'Account response to withdraw' do
+      expect(subject).to respond_to(:withdraw)
+    end
+
+    it 'withdraws an amount and subtracts from balance' do
+      subject.deposit(10)
+      subject.withdraw(10)
+      expect(subject.balance).to eq 0
+    end
+
+    it "stops withdrawl of money if funds less than withdrawl amount " do
+      expect {subject.withdraw(100) }.to raise_error("Insufficient funds")
+    end
+  end
+
 end
-  # describe '#withdraw' do
-  #   it 'displays starting balance of 0' do
-  #     expect(subject).to respond_to(:withdraw)
-  #   end
+
+
   #
   #   it 'withdraws an amount and subtracts from balance' do
   #     subject.deposit(10)
   #     subject.withdraw(10)
   #     expect(subject.balance).to eq 0
   #   end
-  # end
