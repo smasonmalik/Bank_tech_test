@@ -10,12 +10,15 @@ Use the following commands to carry out account functions
 
 Account.deposit(Amount)
 Accpount.withdraw(Amount)
-Account.display(Amount)
+Account.display
+
+Private function
+  Account.balance
 
 
 ### Requirements
 - You should be able to interact with your code via a REPL like IRB or the JavaScript console. (You don't need to implement a command line interface that takes input from STDIN.)
-- eposits, withdrawal.
+- Deposits, withdrawal.
 - Account statement (date, amount, balance) printing.
 - Data can be kept in memory (it doesn't need to be stored to a database or anything).
 
@@ -37,10 +40,10 @@ A client can deposit a sum of money and the amount be credited to their account 
 
 A client can withdraw a sum of money from their account and the amount be debited and balance updated
 
-When depositing money the date of the transaction should be logged
+When depositing money the date of the transaction should be recordeds
 
 A client should be able to print their bank statement, seeing the date of each transaction,
-crdit/debit amount of the transaction and balance after transaction. Formateting of columns should be as
+crdit/debit amount of the transaction and balance after transaction. Formatting of columns should be as
 per the below
 
 date || credit || debit || balance

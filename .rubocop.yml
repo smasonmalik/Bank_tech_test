@@ -1,0 +1,3 @@
+Rails/HasAndBelongsToMany:
+  Exclude:
+    - spec/spec_helper.rb
