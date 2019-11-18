@@ -11,14 +11,14 @@ class Account
 
   def deposit(amount, date = Date.today)
     @balance += amount
-    @history.push(["#{date}, #{'%.2f' % amount},  , #{'%.2f' % @balance}"])
+    @history.push(["#{date} || #{'%.2f' % amount} || || #{'%.2f' % @balance}"])
   end
 
   def withdraw(amount, date = Date.today)
     raise ArgumentError, 'Insufficient funds' unless @balance >= amount
 
     @balance -= amount
-    @history.push(["#{date},  , #{'%.2f' % amount}, #{'%.2f' % @balance}"])
+    @history.push(["#{date} || || #{'%.2f' % amount} || #{'%.2f' % @balance}"])
   end
 
   def statement
