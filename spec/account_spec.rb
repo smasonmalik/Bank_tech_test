@@ -23,7 +23,7 @@ describe Account do
   describe '#display' do
     it 'returns the date, amount and balance of last credit action today' do
       subject.deposit(100)
-      expect(subject.statement).to eq "#{Date.today} || 100.00 || || 100.00"
+      expect(subject.statement).to eq "#{Date.today.strftime("%d-%m-%Y")} || 100.00 || || 100.00"
     end
 
     it 'returns the date, amount and balance of last credit action yesterday' do
@@ -32,26 +32,26 @@ describe Account do
     end
 
     it 'returns the information on last 2 credit actions today' do
-      subject.deposit(100)
-      subject.deposit(50)
-      expect(subject.statement).to eq "#{Date.today} || 50.00 || || 150.00\n"\
-                                      "#{Date.today} || 100.00 || || 100.00"
+      subject.deposit(100, '2019-11-17')
+      subject.deposit(50, '2019-11-17')
+      expect(subject.statement).to eq "2019-11-17 || 50.00 || || 150.00\n"\
+                                      "2019-11-17 || 100.00 || || 100.00"
     end
 
     it 'returns the date, amount and balance of last 2 trasnactions ' do
-      subject.deposit(100)
-      subject.withdraw(50)
-      expect(subject.statement).to eq "#{Date.today} || || 50.00 || 50.00\n"\
-                                      "#{Date.today} || 100.00 || || 100.00"
+      subject.deposit(100, '2019-11-17')
+      subject.withdraw(50, '2019-11-19')
+      expect(subject.statement).to eq "2019-11-19 || || 50.00 || 50.00\n"\
+                                      "2019-11-17 || 100.00 || || 100.00"
     end
 
     it 'returns the date, amount and balance of last 3 trasnactions ' do
-      subject.deposit(100)
-      subject.deposit(20)
-      subject.withdraw(50)
-      expect(subject.statement).to eq "#{Date.today} || || 50.00 || 70.00\n"\
-                                      "#{Date.today} || 20.00 || || 120.00\n"\
-                                      "#{Date.today} || 100.00 || || 100.00"\
+      subject.deposit(100, '2019-11-16')
+      subject.deposit(20, '2019-11-17')
+      subject.withdraw(50, '2019-11-18')
+      expect(subject.statement).to eq "2019-11-18 || || 50.00 || 70.00\n"\
+                                      "2019-11-17 || 20.00 || || 120.00\n"\
+                                      "2019-11-16 || 100.00 || || 100.00"\
     end
   end
 

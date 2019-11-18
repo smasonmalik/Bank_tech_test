@@ -9,7 +9,7 @@ class Account
     @history = []
   end
 
-  def deposit(amount, date = Date.today)
+  def deposit(amount, date = Date.today.strftime("%d-%m-%Y"))
     @balance += amount
     @history.push(["#{date} || #{'%.2f' % amount} || || #{'%.2f' % @balance}"])
   end
