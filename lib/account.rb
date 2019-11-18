@@ -22,6 +22,8 @@ class Account
   end
 
   def statement
-    @history.reverse.join("\n")
+    transaction = @history.reverse.join("\n")
+    headers = 'date || credit || debit || balance'
+    "#{headers}\n#{transaction}"
   end
 end
