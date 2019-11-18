@@ -9,17 +9,17 @@ class Account
     @history = []
   end
 
-  def deposit(amount)
+  def deposit(amount, date = Date.today)
     @balance += amount
-    @history.push(['%.2f' % amount, '%.2f' % @balance])
+    @history.push([date, '%.2f' % amount, format('%.2f', @balance)])
   end
 
-  def withdraw(amount)
-    @balance -= amount
-    @history.push(['%.2f' % amount, '%.2f' % @balance])
-  end
+  # def withdraw(amount)
+  #   @balance -= amount
+  #   @history.push(['%.2f' % amount, format('%.2f', @balance)])
+  # end
 
   def statement
-    @history[-1].join(", ")
+    @history[-1].join(', ')
   end
 end
