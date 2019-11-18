@@ -20,7 +20,6 @@ describe Account do
     end
   end
 
-
   describe '#display' do
     it 'returns the date, amount and balance of last action today' do
       subject.deposit(100)
@@ -29,15 +28,16 @@ describe Account do
 
     it 'returns the date, amount and balance of last action yesterday' do
       subject.deposit(100, '2019-11-17')
-      expect(subject.statement).to eq "#{Date.today-1}, 100.00, 100.00"
+      expect(subject.statement).to eq "#{Date.today - 1}, 100.00, 100.00"
     end
 
-    # it 'returns the the last transaction and new balance' do
-    #   subject.deposit(100)
-    #   subject.withdraw(50)
-    #   expect(subject.statement).to eq ('50.00, 50.00')
-    # end
+    it 'returns the information on last 2 trasnactions today' do
+      subject.deposit(100)
+      subject.deposit(50)
+      expect(subject.statement).to eq "#{Date.today}, 100.00, 100.00\n#{Date.today}, 50.00, 150.00"
+    end
   end
+end
   # describe '#withdraw' do
   #   it 'displays starting balance of 0' do
   #     expect(subject).to respond_to(:withdraw)
@@ -49,6 +49,3 @@ describe Account do
   #     expect(subject.balance).to eq 0
   #   end
   # end
-
-
-end
