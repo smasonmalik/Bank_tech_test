@@ -9,7 +9,8 @@ class Account
 
   attr_reader :balance, :history
 
-  def initialize(history = History.new)
+  def initialize(name, history = History.new)
+    @name = name
     @history = history
     @balance = START_BALANCE
   end

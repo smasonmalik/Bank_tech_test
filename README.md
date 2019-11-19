@@ -1,25 +1,47 @@
-### setup
+## Overview
+A small pogramme to manage deposits, withdrawls and statements into a bank account
+Each line of the statement is transaction on the account, itemising the date
+of transaction, debit/credit amount and the account balance after the transaction.
 
-git clone this repository
+Although not specified explicitly the account is created with a starting balance
+of 0. This is sete as a constant and can be amended as required. Addionally, it
+was assumed that their is no overdraft on the default account. As such a withdrawl
+that would result in the account balance being less tehan 0 is blocked. However,
+this can also be amended by changing the OVERDRAFT_LIMIT constant
+
+Depending on client specification, the code could be improved by storing the
+information of each transaction (date, amount, balance) as individual items,
+rather than a single long string. If this was implemented then the formatting of
+the statement could be seperated into a new class. However, as it stands the specification does not require the individual elements of each transaction to be
+accesed
+
+### Setup
+
+Git clone this repository
 ```https://github.com/smasonmalik/Bank_tech_test.git```
 
-Run ```Bunlde install```
+Run ```Bundle install``` from cmd line
 
+Run ```rspec``` from cmd line to run unit tests and check test coverage
 
-Run IRB
+### Run programme
+The programme can be run in IRB<br>
+To start require account file in IRB<br>
+```2.6.3 :001 > require './lib/account'```<br>
+Create a new account passing account users' name as argument<br>
+```2.6.3 :002 > account = Account.new('JBloggs')```<br>
+Deposit money into the account<br>
+```2.6.3 :003 > account.deposit(100)```<br>
+Withdraw money from the account<br>
+```2.6.3 :004 > account.withdraw(50)```<br>
+Print account statement
+```2.6.3 :005 > account.print_statement
+date || credit || debit || balance
+19/11/2019 || || 50.00 || 50.00
+19/11/2019 || 100.00 || || 100.00
+```
 
-
-Use the following commands to carry out account functions
-
-Account.deposit(Amount)
-Accpount.withdraw(Amount)
-Account.statement
-
-Private function
-  Account.balance
-
-
-### Requirements
+### Client Requirements
 - You should be able to interact with your code via a REPL like IRB or the JavaScript console. (You don't need to implement a command line interface that takes input from STDIN.)
 - Deposits, withdrawal.
 - Account statement (date, amount, balance) printing.
@@ -31,23 +53,6 @@ Private function
 - And a withdrawal of 500 on 14-01-2012
 - When she prints her bank statement
 - Then she would see
-
-date || credit || debit || balance
-14/01/2012 || || 500.00 || 2500.00
-13/01/2012 || 2000.00 || || 3000.00
-10/01/2012 || 1000.00 || || 1000.00
-
-### User Stories
-
-A client can deposit a sum of money and the amount be credited to their account and balance updated
-
-A client can withdraw a sum of money from their account and the amount be debited and balance updated
-
-When depositing money the date of the transaction should be recordeds
-
-A client should be able to print their bank statement, seeing the date of each transaction,
-crdit/debit amount of the transaction and balance after transaction. Formatting of columns should be as
-per the below
 
 date || credit || debit || balance
 14/01/2012 || || 500.00 || 2500.00
