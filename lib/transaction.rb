@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+# stores the current transaction as a string
 class Transaction
   attr_reader :transaction
-  
+
   def initialize
     @transaction = ''
   end

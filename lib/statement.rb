@@ -18,5 +18,4 @@ class Statement
     statement = @statement.reverse.join("\n")
     "#{HEADERS}\n#{statement}"
   end
-
 end
