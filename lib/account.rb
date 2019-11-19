@@ -2,28 +2,44 @@
 
 # Bank account class
 class Account
+
+  HEADERS = 'date || credit || debit || balance'
+  START_BALANCE = 0
+
   attr_reader :balance, :history
 
   def initialize
-    @balance = 0
+    @balance = START_BALANCE
     @history = []
   end
 
-  def deposit(amount, date = Date.today.strftime("%d-%m-%Y"))
+  def deposit(amount)
     @balance += amount
-    @history.push(["#{date} || #{'%.2f' % amount} || || #{'%.2f' % @balance}"])
+    @history.push(["#{date} || #{value(amount)} || || #{balance_format}"])
   end
 
-  def withdraw(amount, date = Date.today)
+  def withdraw(amount)
     raise ArgumentError, 'Insufficient funds' unless @balance >= amount
 
     @balance -= amount
-    @history.push(["#{date} || || #{'%.2f' % amount} || #{'%.2f' % @balance}"])
+    @history.push(["#{date} || || #{value(amount)} || #{balance_format}"])
   end
 
   def statement
     transaction = @history.reverse.join("\n")
-    headers = 'date || credit || debit || balance'
+    headers = HEADERS
     "#{headers}\n#{transaction}"
+  end
+  private
+  def date
+    Date.today.strftime('%d/%m/%Y')
+  end
+
+  def value(amount)
+    '%.2f' % amount
+  end
+
+  def balance_format
+    '%.2f' % @balance
   end
 end

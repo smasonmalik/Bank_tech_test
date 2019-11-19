@@ -24,40 +24,45 @@ describe Account do
     it 'returns the date, amount and balance of last credit action today' do
       subject.deposit(100)
       expect(subject.statement).to eq "date || credit || debit || balance\n"\
-                                      "#{Date.today.strftime("%d-%m-%Y")} "\
+                                      "#{Date.today.strftime("%d/%m/%Y")} "\
                                       '|| 100.00 || || 100.00'
     end
 
     it 'returns the date, amount and balance of last credit action yesterday' do
-      subject.deposit(100, '2019-11-17')
+      allow(subject).to receive(:date).and_return('16/11/2019')
+      subject.deposit(100)
       expect(subject.statement).to eq "date || credit || debit || balance\n"\
-                                      "#{Date.today - 1} || 100.00 || || 100.00"
+                                      "16/11/2019 || 100.00 || || 100.00"
     end
 
     it 'returns the information on last 2 credit actions today' do
-      subject.deposit(100, '2019-11-17')
-      subject.deposit(50, '2019-11-17')
+      allow(subject).to receive(:date).and_return('19/11/2019')
+      subject.deposit(100)
+      subject.deposit(50)
       expect(subject.statement).to eq "date || credit || debit || balance\n"\
-                                      "2019-11-17 || 50.00 || || 150.00\n"\
-                                      '2019-11-17 || 100.00 || || 100.00'
+                                      "19/11/2019 || 50.00 || || 150.00\n"\
+                                      '19/11/2019 || 100.00 || || 100.00'
     end
 
     it 'returns the date, amount and balance of last 2 trasnactions ' do
-      subject.deposit(100, '2019-11-17')
-      subject.withdraw(50, '2019-11-19')
+      subject.deposit(100)
+      subject.withdraw(50)
       expect(subject.statement).to eq "date || credit || debit || balance\n"\
-                                      "2019-11-19 || || 50.00 || 50.00\n"\
-                                      '2019-11-17 || 100.00 || || 100.00'
+                                      "19/11/2019 || || 50.00 || 50.00\n"\
+                                      '19/11/2019 || 100.00 || || 100.00'
     end
 
     it 'returns the date, amount and balance of last 3 trasnactions ' do
-      subject.deposit(100, '2019-11-16')
-      subject.deposit(20, '2019-11-17')
-      subject.withdraw(50, '2019-11-18')
+      allow(subject).to receive(:date).and_return('10/01/2012')
+      subject.deposit(1000)
+      allow(subject).to receive(:date).and_return('13/01/2012')
+      subject.deposit(2000)
+      allow(subject).to receive(:date).and_return('14/01/2012')
+      subject.withdraw(500)
       expect(subject.statement).to eq "date || credit || debit || balance\n"\
-                                      "2019-11-18 || || 50.00 || 70.00\n"\
-                                      "2019-11-17 || 20.00 || || 120.00\n"\
-                                      '2019-11-16 || 100.00 || || 100.00'
+                                      "14/01/2012 || || 500.00 || 2500.00\n"\
+                                      "13/01/2012 || 2000.00 || || 3000.00\n"\
+                                      '10/01/2012 || 1000.00 || || 1000.00'
     end
   end
 
