@@ -17,14 +17,14 @@ class Account
 
   def deposit(amount)
     @balance += amount
-    @history.credit_transaction(amount, balance)
+    @history.credit_transaction(amount, @balance)
   end
 
   def withdraw(amount)
     raise ArgumentError, 'Insufficient funds' unless (@balance - amount) >= OVERDRAFT_LIMIT
 
     @balance -= amount
-    @history.debit_transaction(amount, balance)
+    @history.debit_transaction(amount, @balance)
   end
 
   def print_statement

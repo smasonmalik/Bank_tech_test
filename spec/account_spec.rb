@@ -3,10 +3,11 @@
 require 'account'
 
 describe Account do
+  subject(:subject) { described_class.new('user101') }
   statement = "date || credit || debit || balance\n"\
                  "19/11/2019 || 50.50 || || 151.25\n"
   let(:history) { double(:history, statement: statement) }
-  let(:account) { Account.new(history) }
+  let(:account) { Account.new('sid', history) }
 
   describe '#deposit' do
     it 'reponds to #deposit' do
