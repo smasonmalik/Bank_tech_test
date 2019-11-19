@@ -28,28 +28,21 @@ describe Account do
                                       '|| 100.00 || || 100.00'
     end
 
-    it 'returns the date, amount and balance of last credit action yesterday' do
-      allow(subject).to receive(:date).and_return('16/11/2019')
-      subject.deposit(100)
-      expect(subject.statement).to eq "date || credit || debit || balance\n"\
-                                      "16/11/2019 || 100.00 || || 100.00"
-    end
-
     it 'returns the information on last 2 credit actions today' do
       allow(subject).to receive(:date).and_return('19/11/2019')
-      subject.deposit(100)
-      subject.deposit(50)
+      subject.deposit(100.75)
+      subject.deposit(50.50)
       expect(subject.statement).to eq "date || credit || debit || balance\n"\
-                                      "19/11/2019 || 50.00 || || 150.00\n"\
-                                      '19/11/2019 || 100.00 || || 100.00'
+                                      "19/11/2019 || 50.50 || || 151.25\n"\
+                                      '19/11/2019 || 100.75 || || 100.75'
     end
 
-    it 'returns the date, amount and balance of last 2 trasnactions ' do
-      subject.deposit(100)
-      subject.withdraw(50)
+    it 'returns the date, amount and balance of last 2 transactions ' do
+      subject.deposit(100.10)
+      subject.withdraw(50.25)
       expect(subject.statement).to eq "date || credit || debit || balance\n"\
-                                      "19/11/2019 || || 50.00 || 50.00\n"\
-                                      '19/11/2019 || 100.00 || || 100.00'
+                                      "19/11/2019 || || 50.25 || 49.85\n"\
+                                      '19/11/2019 || 100.10 || || 100.10'
     end
 
     it 'returns the date, amount and balance of last 3 trasnactions ' do
@@ -77,7 +70,7 @@ describe Account do
       expect(subject.balance).to eq 0
     end
 
-    it 'stops withdrawl of money if funds less than withdrawl amount' do
+    it 'throws error if funds would become less than overdraft limit' do
       expect { subject.withdraw(100) }.to raise_error('Insufficient funds')
     end
   end

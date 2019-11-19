@@ -5,6 +5,7 @@ class Account
 
   HEADERS = 'date || credit || debit || balance'
   START_BALANCE = 0
+  OVERDRAFT_LIMIT = 0
 
   attr_reader :balance, :history
 
@@ -19,7 +20,7 @@ class Account
   end
 
   def withdraw(amount)
-    raise ArgumentError, 'Insufficient funds' unless @balance >= amount
+    raise ArgumentError, 'Insufficient funds' unless (@balance-amount) >= OVERDRAFT_LIMIT
 
     @balance -= amount
     @history.push(["#{date} || || #{value(amount)} || #{balance_format}"])
@@ -27,10 +28,11 @@ class Account
 
   def statement
     transaction = @history.reverse.join("\n")
-    headers = HEADERS
-    "#{headers}\n#{transaction}"
+    "#{HEADERS}\n#{transaction}"
   end
+
   private
+
   def date
     Date.today.strftime('%d/%m/%Y')
   end
