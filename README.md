@@ -1,19 +1,18 @@
 ## Overview
-A small pogramme to manage deposits, withdrawls and statements into a bank account
+A small pogramme to manage deposits, withdrawls into a bank account and associated statement of account.
+
 Each line of the statement is transaction on the account, itemising the date
 of transaction, debit/credit amount and the account balance after the transaction.
 
 Although not specified explicitly the account is created with a starting balance
-of 0. This is sete as a constant and can be amended as required. Addionally, it
+of 0. This is set as a constant and can be amended as required. Addionally, it
 was assumed that their is no overdraft on the default account. As such a withdrawl
 that would result in the account balance being less tehan 0 is blocked. However,
 this can also be amended by changing the OVERDRAFT_LIMIT constant
 
 Depending on client specification, the code could be improved by storing the
 information of each transaction (date, amount, balance) as individual items,
-rather than a single long string. If this was implemented then the formatting of
-the statement could be seperated into a new class. However, as it stands the specification does not require the individual elements of each transaction to be
-accesed
+rather than a single long string. However, as it stands the specification does not require the individual elements of each transaction to be accesed.
 
 ### Setup
 
