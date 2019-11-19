@@ -72,7 +72,7 @@
         null,
         null
       ],
-      "/Users/student/Projects/week10/bank_tech_test/lib/history.rb": [
+      "/Users/student/Projects/week10/bank_tech_test/lib/statement.rb": [
         null,
         null,
         null,
@@ -113,7 +113,7 @@
         null,
         null
       ],
-      "/Users/student/Projects/week10/bank_tech_test/spec/history_spec.rb": [
+      "/Users/student/Projects/week10/bank_tech_test/spec/statement_spec.rb": [
         null,
         null,
         1,
@@ -176,6 +176,6 @@
         null
       ]
     },
-    "timestamp": 1574172232
+    "timestamp": 1574174308
   }
 }

@@ -1,26 +1,26 @@
 # frozen_string_literal: true
 
 # account History class
-class History
+class Statement
   HEADERS = 'date || credit || debit || balance'
 
-  attr_reader :history
+  attr_reader :transactions
 
   def initialize
-    @history = []
+    @transactions = []
   end
 
   def credit_transaction(amount, balance)
-    @history.push(["#{date} || #{value(amount)} || || #{balance_format(balance)}"])
+    @transactions.push(["#{date} || #{value(amount)} || || #{balance_format(balance)}"])
   end
 
   def debit_transaction(amount, balance)
-    @history.push(["#{date} || || #{value(amount)} || #{balance_format(balance)}"])
+    @transactions.push(["#{date} || || #{value(amount)} || #{balance_format(balance)}"])
   end
 
-  def statement
-    transaction = @history.reverse.join("\n")
-    "#{HEADERS}\n#{transaction}"
+  def formatter
+    transactions = @transactions.reverse.join("\n")
+    "#{HEADERS}\n#{transactions}"
   end
 
  private
