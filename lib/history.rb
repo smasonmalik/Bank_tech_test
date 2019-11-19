@@ -26,14 +26,14 @@ class History
  private
 
   def date
-    Date.today.strftime('%d/%m/%Y')
+    Time.now.strftime('%d/%m/%Y')
   end
 
   def value(amount)
-    '%.2f' % amount
+    format('%.2f', amount)
   end
 
   def balance_format(balance)
-    '%.2f' % balance
+    format('%.2f', balance)
   end
 end

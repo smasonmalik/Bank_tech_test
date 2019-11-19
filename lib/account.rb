@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require 'history'
+require_relative 'history'
+
 # Bank account class
 class Account
   START_BALANCE = 0
@@ -26,6 +27,6 @@ class Account
   end
 
   def print_statement
-    @history.statement
+    puts @history.statement
   end
 end

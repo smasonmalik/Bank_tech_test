@@ -1,6 +1,9 @@
 ### setup
 
 git clone this repository
+```https://github.com/smasonmalik/Bank_tech_test.git```
+
+Run ```Bunlde install```
 
 
 Run IRB
