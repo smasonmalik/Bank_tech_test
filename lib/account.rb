@@ -1,47 +1,31 @@
 # frozen_string_literal: true
 
+require 'history'
 # Bank account class
 class Account
-
-  HEADERS = 'date || credit || debit || balance'
   START_BALANCE = 0
   OVERDRAFT_LIMIT = 0
 
   attr_reader :balance, :history
 
-  def initialize
+  def initialize(history = History.new)
+    @history = history
     @balance = START_BALANCE
-    @history = []
   end
 
   def deposit(amount)
     @balance += amount
-    @history.push(["#{date} || #{value(amount)} || || #{balance_format}"])
+    @history.credit_transaction(amount, balance)
   end
 
   def withdraw(amount)
-    raise ArgumentError, 'Insufficient funds' unless (@balance-amount) >= OVERDRAFT_LIMIT
+    raise ArgumentError, 'Insufficient funds' unless (@balance - amount) >= OVERDRAFT_LIMIT
 
     @balance -= amount
-    @history.push(["#{date} || || #{value(amount)} || #{balance_format}"])
+    @history.debit_transaction(amount, balance)
   end
 
-  def statement
-    transaction = @history.reverse.join("\n")
-    "#{HEADERS}\n#{transaction}"
-  end
-
-  private
-
-  def date
-    Date.today.strftime('%d/%m/%Y')
-  end
-
-  def value(amount)
-    '%.2f' % amount
-  end
-
-  def balance_format
-    '%.2f' % @balance
+  def print_statement
+    @history.statement
   end
 end
